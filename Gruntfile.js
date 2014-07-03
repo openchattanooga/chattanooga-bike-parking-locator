@@ -317,6 +317,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             'images/{,*/}*.webp',
+            'scripts/{,*/}*.geojson',
             '{,*/}*.html',
             'styles/fonts/{,*/}*.*'
           ]
@@ -424,7 +425,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'newer:jshint',
-    'test',
+    //'test',
     'build'
   ]);
 };
