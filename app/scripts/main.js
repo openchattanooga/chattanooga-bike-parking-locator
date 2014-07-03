@@ -18,13 +18,35 @@
     map = L.map('map');
 
   map.on('load', function() {
-    $.getJSON('scripts/data/bicycle_parking.geojson', function(data) {
-      spots = L.geoJson(data, {
+    $.getJSON('https://data.chattlibrary.org/resource/bicycle-parking-locations-in-the-city-of-chattanooga.json', function(data) {
+      var points = [{
+        type: 'FeatureCollection',
+        features: $.map(data, function(v) {
+          return {
+            'type': 'Feature',
+            'properties': {
+              'name': v.name,
+              'capacity': v.capacity,
+              'description': v.description,
+              'type': v.type
+            },
+            'geometry': {
+              'type': 'Point',
+              /*jshint camelcase: false */
+              'coordinates': [v.location_1.longitude, v.location_1.latitude]
+            }
+          };
+        })
+      }];
+
+      spots = L.geoJson(points, {
         pointToLayer: function (feature, latlng) {
           return L.marker(latlng, {icon: redMarker});
         }
       });
+
       spots.addTo(map);
+
     });
   });
 
