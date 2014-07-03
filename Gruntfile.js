@@ -327,6 +327,11 @@ module.exports = function (grunt) {
           cwd: '.',
           src: ['bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*.*'],
           dest: '<%= config.dist %>'
+        }, {
+          expand: true,
+          cwd: 'bower_components/Leaflet.awesome-markers/dist/images/',
+          src: ['**'],
+          dest: '<%= config.dist %>/styles/images'
         }]
       },
       styles: {
