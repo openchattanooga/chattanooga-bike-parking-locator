@@ -1,19 +1,20 @@
-// Generated on 2014-07-02 using generator-webapp 0.4.9
+// Generated on 2014-07-03 using
+// generator-webapp 0.5.0-rc.1
 'use strict';
 
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
-// use this if you want to recursively match all subfolders:
+// If you want to recursively match all subfolders, use:
 // 'test/spec/**/*.js'
 
 module.exports = function (grunt) {
 
-  // Load grunt tasks automatically
-  require('load-grunt-tasks')(grunt);
-
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
+
+  // Load grunt tasks automatically
+  require('load-grunt-tasks')(grunt);
 
   // Configurable paths
   var config = {
@@ -31,7 +32,7 @@ module.exports = function (grunt) {
     watch: {
       bower: {
         files: ['bower.json'],
-        tasks: ['bowerInstall']
+        tasks: ['wiredep']
       },
       js: {
         files: ['<%= config.app %>/scripts/{,*/}*.js'],
@@ -151,15 +152,14 @@ module.exports = function (grunt) {
     // Compiles Sass to CSS and generates necessary files if requested
     sass: {
       options: {
-        loadPath: [
-          'bower_components'
-        ]
+        sourcemap: true,
+        loadPath: 'bower_components'
       },
       dist: {
         files: [{
           expand: true,
           cwd: '<%= config.app %>/styles',
-          src: ['*.scss'],
+          src: ['*.{scss,sass}'],
           dest: '.tmp/styles',
           ext: '.css'
         }]
@@ -168,7 +168,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= config.app %>/styles',
-          src: ['*.scss'],
+          src: ['*.{scss,sass}'],
           dest: '.tmp/styles',
           ext: '.css'
         }]
@@ -191,13 +191,15 @@ module.exports = function (grunt) {
     },
 
     // Automatically inject Bower components into the HTML file
-    bowerInstall: {
+    wiredep: {
       app: {
+        ignorePath: new RegExp('^<%= config.app %>/|../'),
         src: ['<%= config.app %>/index.html'],
         exclude: ['bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js']
       },
       sass: {
-        src: ['<%= config.app %>/styles/{,*/}*.{scss,sass}']
+        src: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
+        ignorePath: /(\.\.\/){1,2}bower_components\//
       }
     },
 
@@ -279,30 +281,30 @@ module.exports = function (grunt) {
       }
     },
 
-    // By default, your `index.html`'s <!-- Usemin block --> will take care of
-    // minification. These next options are pre-configured if you do not wish
-    // to use the Usemin blocks.
+    // By default, your `index.html`'s <!-- Usemin block --> will take care
+    // of minification. These next options are pre-configured if you do not
+    // wish to use the Usemin blocks.
     // cssmin: {
-    //     dist: {
-    //       files: {
-    //         '<%= config.dist %>/styles/main.css': [
-    //           '.tmp/styles/{,*/}*.css',
-    //           '<%= config.app %>/styles/{,*/}*.css'
-    //         ]
-    //       }
+    //   dist: {
+    //     files: {
+    //       '<%= config.dist %>/styles/main.css': [
+    //         '.tmp/styles/{,*/}*.css',
+    //         '<%= config.app %>/styles/{,*/}*.css'
+    //       ]
     //     }
+    //   }
     // },
     // uglify: {
-    //     dist: {
-    //       files: {
-    //         '<%= config.dist %>/scripts/scripts.js': [
-    //           '<%= config.dist %>/scripts/scripts.js'
-    //         ]
-    //       }
+    //   dist: {
+    //     files: {
+    //       '<%= config.dist %>/scripts/scripts.js': [
+    //         '<%= config.dist %>/scripts/scripts.js'
+    //       ]
     //     }
+    //   }
     // },
     // concat: {
-    //     dist: {}
+    //   dist: {}
     // },
 
     // Copies remaining files to places other tasks can use
@@ -317,15 +319,15 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             'images/{,*/}*.webp',
-            'scripts/{,*/}*.geojson',
             '{,*/}*.html',
+            'scripts/{,*/}*.geojson',
             'styles/fonts/{,*/}*.*'
           ]
         }, {
           expand: true,
           dot: true,
           cwd: '.',
-          src: ['bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*.*'],
+          src: 'bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*',
           dest: '<%= config.dist %>'
         }, {
           expand: true,
@@ -379,13 +381,17 @@ module.exports = function (grunt) {
   });
 
 
-  grunt.registerTask('serve', function (target) {
+  grunt.registerTask('serve', 'start the server and preview your app, --allow-remote for remote access', function (target) {
+    if (grunt.option('allow-remote')) {
+      grunt.config.set('connect.options.hostname', '0.0.0.0');
+    }
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
 
     grunt.task.run([
       'clean:server',
+      'wiredep',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -415,6 +421,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'wiredep',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
