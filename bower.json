@@ -7,7 +7,10 @@
     "jquery": "~1.11.0",
     "leaflet": "~0.7.3",
     "leaflet-knn": "https://github.com/mapbox/leaflet-knn.git#~0.1.0",
-    "Leaflet.awesome-markers": "https://github.com/lvoogdt/Leaflet.awesome-markers.git#~2.0.2"
+    "Leaflet.awesome-markers": "https://github.com/lvoogdt/Leaflet.awesome-markers.git#~2.0.2",
+    "bourbon": "~4.0.2",
+    "font-awesome": "~4.1.0",
+    "neat": "~1.6.0"
   },
   "devDependencies": {}
 }
