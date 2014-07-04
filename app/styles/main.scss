@@ -2,6 +2,7 @@
 @import "bourbon/dist/_bourbon.scss";
 @import "neat/app/assets/stylesheets/_neat.scss";
 // endbower
+
 @import 'base/base';
 
 .browsehappy {
@@ -11,18 +12,24 @@
     padding: 0.2em 0;
 }
 
-html, body {
-  height: 100%;
+body {
+  background-image:url('../images/ricepaper_v3.png');
+  background-repeat:repeat;
 }
 
 #map {
-  height: 60%;
+  min-height: 600px;
+  min-width:600px;
 }
 
-#info {
-  height: 10%;
+
+section {
+  @include outer-container;
+  #heading { @include span-columns(12); }
+  #map { @include span-columns(8); }
+  #info { @include span-columns(4); }
 }
 
-body {
-  margin: 0;
+#heading {
+  margin-bottom: 1em;
 }
