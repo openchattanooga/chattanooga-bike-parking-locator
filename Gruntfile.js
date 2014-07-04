@@ -327,7 +327,13 @@ module.exports = function (grunt) {
           cwd: 'bower_components/Leaflet.awesome-markers/dist/images/',
           src: ['**'],
           dest: '<%= config.dist %>/styles/images'
-        }]
+        }, {
+          expand: true,
+          cwd: 'bower_components/font-awesome/fonts/',
+          src: ['**'],
+          dest: '<%= config.dist %>/fonts'
+        }
+        ]
       },
       styles: {
         expand: true,
