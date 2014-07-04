@@ -70,9 +70,12 @@
     map.setView(coords);
     $entries.html('');
     $.each(nearest, function(i, v) {
+      var p = v.layer.feature.properties,
+        name = p.name === undefined ? '?' : p.name,
+        type = p.type === undefined ? '?' : p.type,
+        capacity = p.capacity === undefined ? '?' : p.capacity;
       v.layer.setIcon(greenMarker);
-      var p = v.layer.feature.properties;
-      $entries.append('<tr><td>' + p.Name + '</td><td>' + p.type + '</td><td>' + p.capacity + '</td></tr>');
+      $entries.append('<tr><td>' + name + '</td><td>' + type + '</td><td>' + capacity + '</td></tr>');
     });
     
   }
