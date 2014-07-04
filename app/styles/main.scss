@@ -20,14 +20,18 @@ body {
 #map {
   min-height: 600px;
   min-width:600px;
+  margin-bottom: 2em;
 }
 
 
 section {
+
   @include outer-container;
-  #heading { @include span-columns(12); }
-  #map { @include span-columns(8); }
-  #info { @include span-columns(4); }
+  #heading { 
+    @include span-columns(12); 
+  }
+  #map { @include span-columns(12); }
+  #info { @include span-columns(12); }
 }
 
 #heading {
