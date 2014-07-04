@@ -195,7 +195,6 @@ module.exports = function (grunt) {
       app: {
         ignorePath: new RegExp('^<%= config.app %>/|../'),
         src: ['<%= config.app %>/index.html'],
-        exclude: ['bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js']
       },
       sass: {
         src: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
@@ -323,12 +322,6 @@ module.exports = function (grunt) {
             'scripts/{,*/}*.geojson',
             'styles/fonts/{,*/}*.*'
           ]
-        }, {
-          expand: true,
-          dot: true,
-          cwd: '.',
-          src: 'bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*',
-          dest: '<%= config.dist %>'
         }, {
           expand: true,
           cwd: 'bower_components/Leaflet.awesome-markers/dist/images/',

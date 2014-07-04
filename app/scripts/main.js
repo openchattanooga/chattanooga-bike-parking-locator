@@ -4,15 +4,18 @@
   var spots = null,
     chattanoogaCoords = [35.0456, -85.2672],
     grayMarker = L.AwesomeMarkers.icon({
+      prefix: 'fa',
       icon: 'user',
       markerColor: 'gray'
     }),
     greenMarker = L.AwesomeMarkers.icon({
-      icon: 'ok',
+      prefix: 'fa',
+      icon: 'check',
       markerColor: 'green'
     }),
     redMarker = L.AwesomeMarkers.icon({
-      icon: 'remove',
+      prefix: 'fa',
+      icon: 'times',
       markerColor: 'red'
     }),
     map = L.map('map');
