@@ -1,5 +1,5 @@
 {
-  "name": "bike-parking-locator",
+  "name": "chattanooga-bike-parking-locator",
   "private": true,
   "dependencies": {
     "modernizr": "~2.6.2",
