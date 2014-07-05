@@ -6,6 +6,8 @@
 @import 'base/base';
 
 $mobile: new-breakpoint(max-width 768px 4);
+$mobile-map-height: new-breakpoint(max-height 700px 4);
+
 
 .browsehappy {
     margin: 0.2em 0;
@@ -41,7 +43,11 @@ section {
   #map { 
     @include span-columns(9); 
     min-height: em(800);
-    min-width: em(700);
+
+    /* Don't want the map to be too long on mobile */
+    @include media($mobile-map-height) {
+      min-height: em(500);
+    }
 
     @include media($mobile) {
       @include span-columns(4);
@@ -58,6 +64,7 @@ section {
 
     table tbody tr td {
       font-size: em(13);
+      text-align: center;
       @include media($mobile) {
         font-size: em(20);
       }
@@ -68,6 +75,11 @@ section {
 #heading {
   margin-bottom: 1em;
   color: white;
+
+  /* Make the heading a little smaller on screens with less vertical space */
+  @include media($mobile-map-height) {
+      font-size: em(12);
+    }
   @include media($mobile) {
     text-align: center;
   }
@@ -75,6 +87,6 @@ section {
 
 footer {
   text-align: right;
-  color: white;
   padding-top: 0.5em;
+  color: white;
 }
