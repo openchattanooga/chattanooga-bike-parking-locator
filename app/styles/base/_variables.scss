@@ -1,5 +1,7 @@
 // Typography
-$sans-serif: 'Droid Serif', 'serif';
+@include font-face(ChatypeLight, '../fonts/chatype-thin/chatypethin-webfont', normal);
+
+$sans-serif: 'ChatypeLight', 'Droid Serif', helvetica, arial, sans-serif;
 $serif: $georgia;
 $base-font-family: $sans-serif;
 $header-font-family: $base-font-family;
