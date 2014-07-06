@@ -2,7 +2,7 @@
   'use strict';
 
   var spots = null,
-    chattanoogaCoords = [35.0456, -85.2672],
+    chattanoogaCoords = [35.022388, -85.323257],
     grayMarker = L.AwesomeMarkers.icon({
       prefix: 'fa',
       icon: 'user',
@@ -53,7 +53,7 @@
     });
   });
 
-  map.setView(chattanoogaCoords, 18);
+  map.setView(chattanoogaCoords, 19);
 
   var centerMarker = L.marker(chattanoogaCoords, {icon: grayMarker});
 
